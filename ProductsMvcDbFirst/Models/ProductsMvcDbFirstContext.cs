@@ -16,7 +16,7 @@ namespace ProductsMvcDbFirst.Models
         {
         }
 
-        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Products.Product> Products { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,16 +29,12 @@ namespace ProductsMvcDbFirst.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<Products.Product>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.Property(e => e.Brand).HasMaxLength(100);
 
                 entity.Property(e => e.CurrentStock).HasColumnName("Current stock");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
+                
                 entity.Property(e => e.LastUpdated)
                     .HasColumnType("datetime")
                     .HasColumnName("Last updated");
